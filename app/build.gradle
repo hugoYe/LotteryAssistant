@@ -30,12 +30,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             shrinkResources true    // 自动清除项目中无用资源
             zipAlignEnabled true
-            // 输出apk名称为ZenLauncher_v1.0.apk
+            // 输出apk名称为LotteryAssistant_v1.0.apk
             applicationVariants.all { variant ->
                 variant.outputs.each { output ->
                     def outputFile = output.outputFile
                     if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                        def fileName = "NanoLauncher_v${defaultConfig.versionName}.apk"
+                        def fileName = "LotteryAssistant_v${defaultConfig.versionName}.apk"
                         output.outputFile = new File(outputFile.parent, fileName)
                     }
                 }
@@ -47,5 +47,6 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.2.0'
+    compile 'com.android.support:percent:22.2.0'
     compile project(':basecorelibrary')
 }

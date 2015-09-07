@@ -1,16 +1,28 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin"
-                android:paddingBottom="@dimen/activity_vertical_margin"
-                tools:context=".MainActivity">
+<android.support.percent.PercentRelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/accent_material_dark"
+        tools:context=".MainActivity">
 
     <TextView
-            android:text="@string/hello_world"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:text="banner : 35% height"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_alignParentTop="true"
+            android:background="#7700ff00"
+            android:gravity="center"
+            app:layout_heightPercent="35%"/>
 
-</RelativeLayout>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="LotteryAssistant : 65% height"
+            android:layout_alignParentBottom="true"
+            android:background="#770000ff"
+            android:gravity="center"
+            app:layout_heightPercent="65%"/>
+
+</android.support.percent.PercentRelativeLayout>

@@ -1,6 +1,7 @@
 package com.hugo.lotteryassistant;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
@@ -21,11 +22,12 @@ public class WelcomeActivity extends Activity {
     private ImageView imgLoadingLogo;
     private LinearLayout ll_content_text;
     private Button butStartLauncher;
+    private boolean mAnimationFinished;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.welcome);
+        setContentView(R.layout.activity_welcome);
         initGuideView();
     }
 
@@ -39,7 +41,7 @@ public class WelcomeActivity extends Activity {
             @Override
             public void onClick(View v) {
                 finish();
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         });
         startAimation();
@@ -48,8 +50,10 @@ public class WelcomeActivity extends Activity {
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            finish();
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            if (mAnimationFinished) {
+                finish();
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
             return false;
         } else {
             return super.onKeyUp(keyCode, event);
@@ -109,6 +113,12 @@ public class WelcomeActivity extends Activity {
         animSet.setDuration(1000);
         animSet.playTogether(anim5, anim6);
         animSet.start();
-
+        animSet.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                mAnimationFinished = true;
+            }
+        });
     }
 }
