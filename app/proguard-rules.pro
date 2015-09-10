@@ -104,3 +104,4 @@
 
 
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!! 请不要在这之前添加东西！！！！！！！！！！！！！！！！！！！！
+-keep class com.hugo.basecorelibrary.convenientbanner.transforms.** { *; }
