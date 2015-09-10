@@ -18,6 +18,9 @@ import com.hugo.basecorelibrary.utilities.DensityUtil;
 
 public class WelcomeActivity extends Activity {
 
+    private static final int ANIM_TIME_FIRST_STEP = 2000;
+    private static final int ANIM_TIME_FIRST_SECOND = 500;
+
     private ImageView imgBigPic;
     private ImageView imgLoadingLogo;
     private LinearLayout ll_content_text;
@@ -63,18 +66,18 @@ public class WelcomeActivity extends Activity {
     private void startAimation() {
         PropertyValuesHolder p1 = PropertyValuesHolder.ofFloat("scaleX", 1.6f, 1f);
         PropertyValuesHolder p2 = PropertyValuesHolder.ofFloat("scaleY", 1.6f, 1f);
-        ObjectAnimator.ofPropertyValuesHolder(imgBigPic, p1, p2).setDuration(4000).start();
+        ObjectAnimator.ofPropertyValuesHolder(imgBigPic, p1, p2).setDuration(ANIM_TIME_FIRST_STEP).start();
         p1 = PropertyValuesHolder.ofFloat("scaleX", 0.8f, 1f);
         p2 = PropertyValuesHolder.ofFloat("scaleY", 0.8f, 1f);
         PropertyValuesHolder p3 = PropertyValuesHolder.ofFloat("alpha", 0.0f, 1f);
-        ObjectAnimator.ofPropertyValuesHolder(imgLoadingLogo, p1, p2, p3).setDuration(4000).start();
+        ObjectAnimator.ofPropertyValuesHolder(imgLoadingLogo, p1, p2, p3).setDuration(ANIM_TIME_FIRST_STEP).start();
         p1 = PropertyValuesHolder.ofFloat("scaleX", 0.8f, 1f);
         p2 = PropertyValuesHolder.ofFloat("scaleY", 0.8f, 1f);
         p3 = PropertyValuesHolder.ofFloat("alpha", 0.0f, 1f);
 
         ObjectAnimator
             objectAnimator =
-            ObjectAnimator.ofPropertyValuesHolder(ll_content_text, p1, p2, p3).setDuration(4000);
+            ObjectAnimator.ofPropertyValuesHolder(ll_content_text, p1, p2, p3).setDuration(ANIM_TIME_FIRST_STEP);
         objectAnimator.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
@@ -110,7 +113,7 @@ public class WelcomeActivity extends Activity {
             );
         AnimatorSet animSet = new AnimatorSet();
         animSet = new AnimatorSet();
-        animSet.setDuration(1000);
+        animSet.setDuration(ANIM_TIME_FIRST_SECOND);
         animSet.playTogether(anim5, anim6);
         animSet.start();
         animSet.addListener(new AnimatorListenerAdapter() {
