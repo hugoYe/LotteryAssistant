@@ -7,22 +7,136 @@
         android:background="@color/accent_material_dark"
         tools:context=".MainActivity">
 
-    <TextView
-            android:text="banner : 35% height"
+
+    <com.hugo.basecorelibrary.convenientbanner.ConvenientBanner
+            android:id="@+id/convenientBanner"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_alignParentTop="true"
-            android:background="#7700ff00"
-            android:gravity="center"
             app:layout_heightPercent="35%"/>
 
-    <TextView
+    <!-- 切页选项 -->
+    <!-- <ListView
+            android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:text="LotteryAssistant : 65% height"
             android:layout_alignParentBottom="true"
-            android:background="#770000ff"
-            android:gravity="center"
-            app:layout_heightPercent="65%"/>
+            app:layout_heightPercent="65%"/> -->
+
+    <android.support.percent.PercentFrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_alignParentBottom="true"
+            app:layout_heightPercent="65%">
+
+        <TextView
+                android:id="@+id/tv_shishicai"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_heightPercent="30%"
+                android:text="时时彩"
+                android:textSize="30sp"
+                android:gravity="center"
+                android:background="#ff8c50"
+                android:clickable="true">
+
+        </TextView>
+
+        <TextView
+                android:id="@+id/tv_jingqingqidai"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_heightPercent="30%"
+                android:layout_gravity="center"
+                android:text="敬请期待"
+                android:textSize="30sp"
+                android:gravity="center"
+                android:background="#ff8c50">
+
+        </TextView>
+
+        <TextView
+                android:id="@+id/tv_shaihaojilu"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="bottom"
+                app:layout_heightPercent="30%"
+                android:text="筛号记录"
+                android:textSize="30sp"
+                android:gravity="center"
+                android:background="#ff8c50">
+        </TextView>
+
+        <android.support.percent.PercentFrameLayout
+                android:id="@+id/pf_shishicai_detail"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="bottom"
+                app:layout_heightPercent="60%"
+                android:visibility="gone">
+
+            <TextView
+                    android:id="@+id/tv_xinjiang"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_widthPercent="30%"
+                    app:layout_heightPercent="40%"
+                    android:layout_gravity="left|top"
+                    android:text="新疆时时彩"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:background="#ff8c50">
+            </TextView>
+            <TextView
+                    android:id="@+id/tv_chongqing"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_widthPercent="30%"
+                    app:layout_heightPercent="40%"
+                    android:layout_gravity="center|top"
+                    android:text="重庆时时彩"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:background="#ff8c50">
+            </TextView>
+            <TextView
+                    android:id="@+id/tv_yazhou"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_widthPercent="30%"
+                    app:layout_heightPercent="40%"
+                    android:layout_gravity="right|top"
+                    android:text="亚洲分分彩"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:background="#ff8c50">
+            </TextView>
+            <TextView
+                    android:id="@+id/tv_tianjin"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_widthPercent="30%"
+                    app:layout_heightPercent="40%"
+                    android:layout_gravity="left|bottom"
+                    android:text="天津时时彩"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:background="#ff8c50">
+            </TextView>
+            <TextView
+                    android:id="@+id/tv_heilongjiang"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_widthPercent="30%"
+                    app:layout_heightPercent="40%"
+                    android:layout_gravity="center|bottom"
+                    android:text="黑龙江时时彩"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:background="#ff8c50">
+            </TextView>
+        </android.support.percent.PercentFrameLayout>
+
+    </android.support.percent.PercentFrameLayout>
 
 </android.support.percent.PercentRelativeLayout>

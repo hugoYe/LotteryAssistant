@@ -1,12 +1,13 @@
 package com.hugo.lotteryassistant;
 
 import android.os.Bundle;
+import android.support.percent.PercentFrameLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hugo.basecorelibrary.convenientbanner.CBViewHolderCreator;
@@ -22,15 +23,16 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class MainActivity extends AppCompatActivity
+    implements AdapterView.OnItemClickListener, View.OnClickListener {
 
     private long mExitTime;
-    private ConvenientBanner convenientBanner;//顶部广告栏控件
+    private ConvenientBanner mConvenientBanner;//顶部广告栏控件
     private ArrayList<Integer> localImages = new ArrayList<Integer>();
     private List<String> networkImages;
     private String[]
         images =
-        {"http://img2.imgtn.bdimg.com/it/u=3093785514,1341050958&fm=21&gp=0.jpg",
+        {"http://image.baidu.com/detail/newindex?col=%E7%BE%8E%E5%A5%B3&tag=%E5%85%A8%E9%83%A8&pn=0&pid=20967406874&aid=&user_id=274610020&setid=12767&sort=0&newsPn=&star=&fr=&from=1",
          "http://img2.3lian.com/2014/f2/37/d/40.jpg",
          "http://d.3987.com/sqmy_131219/001.jpg",
          "http://img2.3lian.com/2014/f2/37/d/39.jpg",
@@ -38,39 +40,70 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
          "http://f.hiphotos.baidu.com/image/h%3D200/sign=1478eb74d5a20cf45990f9df460b4b0c/d058ccbf6c81800a5422e5fdb43533fa838b4779.jpg",
          "http://f.hiphotos.baidu.com/image/pic/item/09fa513d269759ee50f1971ab6fb43166c22dfba.jpg"
         };
-    private ListView listView;
+    //    private ListView listView;
     private ArrayAdapter transformerArrayAdapter;
     private ArrayList<String> transformerList = new ArrayList<String>();
 
+    private TextView mShishicaiTv;
+    private TextView mJingqingqidaiTv;
+    private TextView mShaihaojiluTv;
+    private PercentFrameLayout mShishicaiDetail;
+    private boolean mShowShishicaiDetail;
+    private TextView mXinjiang;
+    private TextView mChongqing;
+    private TextView mYazhou;
+    private TextView mTianjin;
+    private TextView mHeilongjiang;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        setContentView(R.layout.activity_main);
-
-        // banner test begin
-        setContentView(R.layout.banner_test);
+        setContentView(R.layout.activity_main);
         initViews();
         init();
-        // banner test end
+
     }
 
     private void initViews() {
-        convenientBanner = (ConvenientBanner) findViewById(R.id.convenientBanner);
-        listView = (ListView) findViewById(R.id.listView);
-        transformerArrayAdapter =
-            new ArrayAdapter(this, R.layout.adapter_transformer, transformerList);
-        listView.setAdapter(transformerArrayAdapter);
-        listView.setOnItemClickListener(this);
+        mConvenientBanner = (ConvenientBanner) findViewById(R.id.convenientBanner);
+
+        // 切页特效 begin
+//        listView = (ListView) findViewById(R.id.listView);
+//        transformerArrayAdapter =
+//            new ArrayAdapter(this, R.layout.adapter_transformer, transformerList);
+//        listView.setAdapter(transformerArrayAdapter);
+//        listView.setOnItemClickListener(this);
+        // 切页特效 end
+
+        mShishicaiTv = (TextView) findViewById(R.id.tv_shishicai);
+        mShishicaiTv.setOnClickListener(this);
+        mJingqingqidaiTv = (TextView) findViewById(R.id.tv_jingqingqidai);
+        mShaihaojiluTv = (TextView) findViewById(R.id.tv_shaihaojilu);
+        mShishicaiDetail = (PercentFrameLayout) findViewById(R.id.pf_shishicai_detail);
+        mXinjiang = (TextView) findViewById(R.id.tv_xinjiang);
+        mXinjiang.setOnClickListener(this);
+        mChongqing = (TextView) findViewById(R.id.tv_chongqing);
+        mChongqing.setOnClickListener(this);
+        mYazhou = (TextView) findViewById(R.id.tv_yazhou);
+        mYazhou.setOnClickListener(this);
+        mTianjin = (TextView) findViewById(R.id.tv_tianjin);
+        mTianjin.setOnClickListener(this);
+        mHeilongjiang = (TextView) findViewById(R.id.tv_heilongjiang);
+        mHeilongjiang.setOnClickListener(this);
     }
 
     private void init() {
-        initImageLoader();
-        loadTestDatas();
+
+//        loadTransformerList();
+
         //本地图片例子
-        convenientBanner.setPages(
+        //本地图片集合
+        for (int position = 0; position < 7; position++) {
+            localImages.add(getResId("ic_test_" + position, R.drawable.class));
+        }
+        mConvenientBanner.setPages(
             new CBViewHolderCreator<LocalImageHolderView>() {
                 @Override
                 public LocalImageHolderView createHolder() {
@@ -85,16 +118,19 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 //设置翻页的效果，不需要翻页效果可用不设
             .setPageTransformer(Transformer.DefaultTransformer);
 
-//        convenientBanner.setManualPageable(false);设置不能手动影响
+//        mConvenientBanner.setManualPageable(false);设置不能手动影响
 
         //网络加载例子
-//        networkImages= Arrays.asList(images);
-//        convenientBanner.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
+        //        initImageLoader();
+//        networkImages = Arrays.asList(images);
+//        mConvenientBanner.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
 //            @Override
 //            public NetworkImageHolderView createHolder() {
 //                return new NetworkImageHolderView();
 //            }
-//        },networkImages);
+//        }, networkImages).setPageIndicator(
+//            new int[]{R.drawable.ic_page_indicator, R.drawable.ic_page_indicator_focused})
+//            .setPageTransformer(Transformer.DefaultTransformer);
     }
 
     //初始化网络图片缓存库
@@ -113,15 +149,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         ImageLoader.getInstance().init(config);
     }
 
-    /*
-    加入测试Views
-    * */
-    private void loadTestDatas() {
-        //本地图片集合
-        for (int position = 0; position < 7; position++) {
-            localImages.add(getResId("ic_test_" + position, R.drawable.class));
-        }
 
+    private void loadTransformerList() {
         //各种翻页效果
         transformerList.add(Transformer.DefaultTransformer.getClassName());
         transformerList.add(Transformer.AccordionTransformer.getClassName());
@@ -171,7 +200,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onResume() {
         super.onResume();
         //开始自动翻页
-        convenientBanner.startTurning(5000);
+        mConvenientBanner.startTurning(5000);
     }
 
     // 停止自动翻页
@@ -179,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onPause() {
         super.onPause();
         //停止翻页
-        convenientBanner.stopTurning();
+        mConvenientBanner.stopTurning();
     }
 
     //点击切换效果
@@ -187,6 +216,45 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         String name = transformerList.get(position);
         Transformer transformer = Transformer.valueOf(name);
-        convenientBanner.setPageTransformer(transformer);
+        mConvenientBanner.setPageTransformer(transformer);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_shishicai:
+                if (mShowShishicaiDetail) {
+                    mJingqingqidaiTv.setVisibility(View.VISIBLE);
+                    mShaihaojiluTv.setVisibility(View.VISIBLE);
+                    mShishicaiDetail.setVisibility(View.GONE);
+                    mShowShishicaiDetail = false;
+                } else {
+                    mJingqingqidaiTv.setVisibility(View.GONE);
+                    mShaihaojiluTv.setVisibility(View.GONE);
+                    mShishicaiDetail.setVisibility(View.VISIBLE);
+                    mShowShishicaiDetail = true;
+                }
+                break;
+
+            case R.id.tv_xinjiang:
+                Toast.makeText(this, ((TextView) v).getText(), Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.tv_chongqing:
+                Toast.makeText(this, ((TextView) v).getText(), Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.tv_yazhou:
+                Toast.makeText(this, ((TextView) v).getText(), Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.tv_tianjin:
+                Toast.makeText(this, ((TextView) v).getText(), Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.tv_heilongjiang:
+                Toast.makeText(this, ((TextView) v).getText(), Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 }
